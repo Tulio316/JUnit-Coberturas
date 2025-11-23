@@ -12,7 +12,7 @@
     </properties>
     <build>
         <plugins>
-
+	    <!-- Actualizar -->
             <!-- Plugin para ejecutar la aplicación -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
