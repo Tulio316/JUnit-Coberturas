@@ -1,4 +1,4 @@
-name: Java CI with Maven and JaCoCo
+name: Maven Build for All Modules
 
 on:
   push:
@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -16,19 +15,29 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
+        cache: maven
 
-    - name: Build with Maven
+    - name: Build Email project
+      working-directory: ./Email
       run: mvn -B clean verify
 
-    - name: Generate JaCoCo Report
-      run: mvn jacoco:report
+    - name: Build InventoryManager project
+      working-directory: ./InventoryManager
+      run: mvn -B clean verify
 
-    - name: Upload JaCoCo Report Artifact
+    - name: Build TextProcessor project
+      working-directory: ./TextProcessor
+      run: mvn -B clean verify
+
+    - name: Upload JaCoCo Reports
       uses: actions/upload-artifact@v3
       with:
-        name: jacoco-report
-        path: target/site/jacoco
+        name: jacoco-reports
+        path: |
+          Email/target/site/jacoco
+          InventoryManager/target/site/jacoco
+          TextProcessor/target/site/jacoco
