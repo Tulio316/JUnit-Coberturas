@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InventoryManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">InventoryManager</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.inventorymanager</a> &gt; <span class="el_source">InventoryManager.java</span></div><h1>InventoryManager.java</h1><pre class="source lang-java linenums">/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.inventorymanager;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author Adrian
+ */
+<span class="fc" id="L14">public class InventoryManager {</span>
+
+    public static void main(String[] args) {
+        // Ejemplo de prueba manual
+<span class="fc" id="L18">        InventoryManager inv = new InventoryManager();</span>
+<span class="fc" id="L19">        inv.addItem(&quot;Laptop&quot;, 5);</span>
+<span class="fc" id="L20">        System.out.println(&quot;Stock Laptop: &quot; + inv.getStock(&quot;Laptop&quot;));</span>
+<span class="fc" id="L21">    }</span>
+<span class="fc" id="L22">    private Map&lt;String, Integer&gt; inventory = new HashMap&lt;&gt;();</span>
+    public void addItem(String item, int quantity) {
+    // Validar nombre nulo o vacío
+<span class="fc bfc" id="L25" title="All 4 branches covered.">    if (item == null || item.trim().isEmpty()) {</span>
+<span class="fc" id="L26">    throw new IllegalArgumentException(&quot;El nombre del producto no puede estar vacío&quot;);</span>
+    }
+    // Validar longitud del nombre (2–50)
+<span class="fc bfc" id="L29" title="All 4 branches covered.">    if (item.length() &lt; 2 || item.length() &gt; 50) {</span>
+<span class="fc" id="L30">    throw new IllegalArgumentException(&quot;El nombre del producto debe tener entre 2 y 50 caracteres&quot;);</span>
+    }
+    // Validar cantidad mínima
+<span class="fc bfc" id="L33" title="All 2 branches covered.">    if (quantity &lt;= 0) {</span>
+<span class="fc" id="L34">    throw new IllegalArgumentException(&quot;La cantidad debe ser mayor que 0&quot;);</span>
+    }
+    // Validar cantidad máxima
+<span class="fc bfc" id="L37" title="All 2 branches covered.">    if (quantity &gt; 1000) {</span>
+<span class="fc" id="L38">    throw new IllegalArgumentException(&quot;La cantidad máxima permitida es 1000&quot;);</span>
+    }
+    // Agregar o sumar stock
+<span class="fc" id="L41">    inventory.put(item, inventory.getOrDefault(item, 0) + quantity);</span>
+<span class="fc" id="L42">    }</span>
+    public int getStock(String item) {
+<span class="fc" id="L44">    return inventory.getOrDefault(item, 0);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.14.202510111229</span></div></body></html>
